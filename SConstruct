@@ -371,14 +371,15 @@ if env["PLATFORM"] == "win32":
   os.makedirs(pysgppTempFolder)
 
   # add it to the build python path
-  env["ENV"]["PYTHONPATH"] = os.pathsep.join([pysgppTempFolder,
-                                              env["ENV"].get("PYTHONPATH", "")])
+  env["ENV"]["PYTHONPATH"] = os.pathsep.join([
+      pysgppTempFolder,
+      os.path.join(pysgppTempFolder, "pysgpp"),
+      env["ENV"].get("PYTHONPATH", "")])
 else:
-  env["ENV"]["PYTHONPATH"] = os.pathsep.join([env["ENV"].get("PYTHONPATH", ""),
-                                              PYSGPP_PACKAGE_PATH.abspath])
-  pysgpp_package_path = PYSGPP_PACKAGE_PATH.abspath + '/pysgpp'
-  env["ENV"]["PYTHONPATH"] = os.pathsep.join([env["ENV"].get("PYTHONPATH", ""),
-                                              pysgpp_package_path])
+  env["ENV"]["PYTHONPATH"] = os.pathsep.join([
+      PYSGPP_PACKAGE_PATH.abspath,
+      os.path.join(PYSGPP_PACKAGE_PATH.abspath, "pysgpp"),
+      env["ENV"].get("PYTHONPATH", "")])
 
 # Style checker
 #########################################################################
